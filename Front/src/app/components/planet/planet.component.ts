@@ -19,9 +19,11 @@ export class PlanetComponent implements OnInit {
     // this.planetas = this._planetService.getPlanetas();
     // console.log(this.planetas);
   }
+
   getAll(){
     this.servicioPlaneta.getAll().subscribe((data)=>{
       this.planetas = data; 
+      console.log(this.planetas);
     }   );
     
   }

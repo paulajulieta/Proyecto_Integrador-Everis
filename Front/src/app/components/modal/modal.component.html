@@ -3,7 +3,7 @@
     <div class="form-group">
       <div *ngIf="this.resultado == 'planet'">
           <label>Nombre:</label>
-          <input type="text" class="form-control" > 
+          <input type="text" class="form-control"name= "nombre" id="nombre" [(ngModel)]="planet.name" > 
       </div>
       <div *ngIf="this.resultado == 'star'">
           <label>Nombre:</label>
@@ -11,12 +11,12 @@
       </div>
 
 
-       
+   
     </div>
     <div class="form-group">
         <div *ngIf="this.resultado == 'planet'" >
           <label>TAMAÑO </label>
-            <input type="text"  class="form-control"> 
+            <input type="text"  class="form-control"name="size" [(ngModel)]="planet.size" > 
         </div>
          <div *ngIf="this.resultado == 'star'">
             <label>DENSIDAD:</label>
@@ -26,8 +26,8 @@
     </div>
     <div class="form-group" *ngIf="this.resultado == 'planet'">
       <label>Estrella </label>
-       <select *ngFor="let star of star" [(ngModel)]="planeta.star.id">
-        <option value="{{star.id}}"  >{{star.nombre}}</option>  
+       <select *ngFor="let planet of planetas" [(ngModel)]="planeta.star">
+        <option value="{{planet.star.id}}"  >{{planet.star.nombre }}</option>  
       </select>
     </div>
    

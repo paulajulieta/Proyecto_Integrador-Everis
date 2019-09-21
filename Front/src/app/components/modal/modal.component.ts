@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Planet } from 'src/model/planet';
 import { Star } from 'src/model/star';
 import { StarService } from 'src/app/servicios/star.service';
+import { PlanetasService } from 'src/app/servicios/planetas.service';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -11,12 +12,12 @@ import { StarService } from 'src/app/servicios/star.service';
 })
 export class ModalComponent implements OnInit {
 resultado:string;
-  // planet:Planet={
-  //   id:0,
-  //   name:" ",
-  //   size:0,
-  //   star: 
-  // }
+  planet:Planet={
+    id:0,
+    name:" ",
+    size:0,
+    star: null,
+  }
 
 star: Star={
   id: 0,
@@ -27,11 +28,14 @@ star: Star={
 
  
 
-  constructor(private route: ActivatedRoute, private starSer : StarService, private router:Router ) {
+  constructor(private route: ActivatedRoute, private starSer : StarService, private router:Router, private planetService: PlanetasService ) {
     
    // if(route.snapshot){}
   // console.log(route.snapshot.url[0].path);
   this.resultado = route.snapshot.url[0].path;
+
+
+
     this.route.params.subscribe( (data)=>{
       if(data['id'] != "nuevo" ){
         this.getOne(data['id']);
@@ -50,29 +54,51 @@ star: Star={
   }
 
   add(){ 
-    this.starSer.post(this.star).subscribe( (data)=>{
-      this.cerrar();
-      this.router.navigate(['/']);
-  }
+    if(this.resultado == 'star'){
+      this.starSer.post(this.star).subscribe( (data)=>{
+        this.cerrar();
+        this.router.navigate(['/']);
+      });  
+      
+    } else if(this.resultado == 'planet'){
+      this.planetService.post(this.planet).subscribe((data)=>{
+        this.cerrar();
+        this.router.navigate(['/']);
+      });
+    }
 
-
-  );   }
+}
   update(id:number){
-    
+    if(this.resultado == 'star'){ 
     this.starSer.put(id, this.star).subscribe( (data)=>{
      // this.cerrar();
       this.router.navigate(['/']);
-      }
+      });
+    } else if(this.resultado == 'planet'){
+      this.planetService.put(id, this.planet).subscribe((data)=>{
+        this.router.navigate(['/']);
 
-
-    ) ;
-  
+      });
+    
+    }
   }
-  getOne(id:number){this.starSer.getOne(id).subscribe((data)=>{
+  getOne(id:number){
+    if(this.resultado == 'star'){
+    this.starSer.getOne(id).subscribe((data)=>{
     this.star = data;
-  })   }
+    });   
+  } else if(this.resultado == 'planet'){
+      this.planetService.getOne(id).subscribe((data)=>{
+        this.planet = data;
+      });
+
+  }
+
+}
 
   save(){
+
+    if(this.resultado == 'star'){
     this.route.params.subscribe((data)=>{
       if(data['id'] =="nuevo" ){
         this.add();
@@ -81,6 +107,20 @@ star: Star={
         this.update(data['id']);
       }
   
-     }    );    
+     });    
+    } else if(this.resultado == 'planet'){
+      this.route.params.subscribe((data)=>{
+        if(data['id'] =="nuevo" ){
+          this.add();
+        }
+        else {
+          this.update(data['id']);
+        }
+    
+       });
+    }
+
+
+
   }
 }

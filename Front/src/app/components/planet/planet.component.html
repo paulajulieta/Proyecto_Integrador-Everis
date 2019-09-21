@@ -15,8 +15,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor=" let planet of planetas;" >
-          <td>{{planet.id}}  </td>
+        <tr *ngFor=" let planet of planetas; let i=index" >
+          <td>{{i+1}}  </td>
           <td>{{ planet.name }}</td>
           <td> {{planet.size}} </td>
           <td> {{planet.star.nombre  }}</td>
