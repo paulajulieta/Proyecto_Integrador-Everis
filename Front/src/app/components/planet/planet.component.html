@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>Listado de planetas</h2>
+    
+    <button type="button" class="btn btn-primary"  (click)="agregar()">Agregar</button>
+
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="agregar()">Agregar</button> -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>tamaño</th>
+          <th>Estrella </th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let planet of planetas;" >
+          <td>{{planet.id}}  </td>
+          <td>{{ planet.name }}</td>
+          <td> {{planet.size}} </td>
+          <td> {{planet.star.nombre  }}</td>
+          <td> <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-primary" (click)="update(planet.id)" >editar</button>
+              <button type="button" class="btn btn-primary" (click)="delete(planet.id)">eliminar</button>
+            </div> </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>

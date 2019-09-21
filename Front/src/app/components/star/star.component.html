@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Listado de estrellas</h2>
+    <button type="button" class="btn btn-primary" (click)="agregar()"  >Agregar</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Densidad</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let star of stars;">
+          <td>{{star.id }}  </td>
+          <td>{{star.nombre}}  </td>
+          <td> {{star.densidad}}</td>
+          <td> <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-primary"  (click)="update(star.id)" >editar</button>
+              <button type="button" class="btn btn-primary"  (click)="delete(star.id)" >eliminar</button>
+            </div> </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>

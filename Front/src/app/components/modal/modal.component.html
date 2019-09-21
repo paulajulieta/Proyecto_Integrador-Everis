@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <form>
+    <div class="form-group">
+      <div *ngIf="this.resultado == 'planet'">
+          <label>Nombre:</label>
+          <input type="text" class="form-control" > 
+      </div>
+      <div *ngIf="this.resultado == 'star'">
+          <label>Nombre:</label>
+          <input type="text" class="form-control" name= "nombre" id="nombre" [(ngModel)]="star.nombre" > 
+      </div>
+
+
+       
+    </div>
+    <div class="form-group">
+        <div *ngIf="this.resultado == 'planet'" >
+          <label>TAMAÑO </label>
+            <input type="text"  class="form-control"> 
+        </div>
+         <div *ngIf="this.resultado == 'star'">
+            <label>DENSIDAD:</label>
+            <input type="text" class="form-control" name="densidad" [(ngModel)]="star.densidad" >  
+         </div>
+
+    </div>
+    <div class="form-group" *ngIf="this.resultado == 'planet'">
+      <label>Estrella </label>
+       <select *ngFor="let star of star" [(ngModel)]="planeta.star.id">
+        <option value="{{star.id}}"  >{{star.nombre}}</option>  
+      </select>
+    </div>
+   
+    <button type="submit" class="btn btn-primary" (click)="save()" >Enviar</button>
+
+  </form>
+
+
+</div>
+
+
+  
+   
