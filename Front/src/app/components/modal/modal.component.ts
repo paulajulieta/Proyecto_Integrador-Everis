@@ -26,7 +26,7 @@ star: Star={
 }
   
 
- 
+stars: Star[]=[];
 
   constructor(private route: ActivatedRoute, private starSer : StarService, private router:Router, private planetService: PlanetasService ) {
     
@@ -119,8 +119,10 @@ star: Star={
     
        });
     }
-
-
-
   }
+  getAll(){
+    this.starSer.getAll().subscribe((data)=>{
+      this.stars = data; 
+    }   );
+    }
 }

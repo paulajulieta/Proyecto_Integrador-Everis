@@ -19,13 +19,13 @@ export class StarComponent implements OnInit {
   getAll(){
     this.servicioStar.getAll().subscribe((data)=>{
       this.stars = data; 
-      console.log(this.stars);
+      
     }   );
     
   }
   delete(id:number){
     this.servicioStar.delete(id).subscribe(()=>{
-      console.log("delete exitoso");
+      
       window.location.reload();
      });
   }

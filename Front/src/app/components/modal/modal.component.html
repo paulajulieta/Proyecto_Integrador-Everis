@@ -26,8 +26,9 @@
     </div>
     <div class="form-group" *ngIf="this.resultado == 'planet'">
       <label>Estrella </label>
-       <select *ngFor="let planet of planetas" [(ngModel)]="planeta.star">
-        <option value="{{planet.star.id}}"  >{{planet.star.nombre }}</option>  
+       <select name="star" [(ngModel)]="planet.star" class="form-control form-control-sm">
+
+        <option *ngFor="let star of stars" value="{{star.id}}"  [ngValue]="star" >{{star.nombre }}</option>  
       </select>
     </div>
    
